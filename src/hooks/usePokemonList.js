@@ -3,13 +3,13 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { connect } from "../api/pokeApiClient.js";
 import { mapPokemonListItem } from "../api/pokemonMapper.js";
 
-const LIMITE_POR_PAGINA = 150;
+const LIMITE_POR_PAGINA = 151;
 
 export function usePokemonList() {
     const [pokemons, setPokemons] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const [loadingMore, setLoadingMore] = useState(false); //Cuando llega al final de scroll y debe cargar 20 más.
+    const [loadingMore, setLoadingMore] = useState(false); //Cuando llega al final de scroll y debe cargar 151 más.
 
     const [error, setError] = useState(null);
 

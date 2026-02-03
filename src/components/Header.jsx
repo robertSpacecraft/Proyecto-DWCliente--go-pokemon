@@ -4,12 +4,12 @@ import { getTrainerName } from "../store/trainerStorage.js";
 import styles from "./Header.module.css";
 
 export default function Header() {
-    // Leo el nombre del entrenador desde localStorage
+
+    //Leo el nombre del entrenador desde localStorage
     const nombreEntrenador = getTrainerName();
 
     return (
         <div className={styles.container}>
-            {/* Cabecera */}
             <header className={styles.header}>
                 
 
@@ -27,7 +27,6 @@ export default function Header() {
                     </Link>
                 </nav>
 
-                {/* Insignia del entrenador */}
                 <InsigniaEntrenador nombre={nombreEntrenador} />
             </header>
         </div>

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getTrainerName, setTrainerName } from "../store/trainerStorage.js";
 import styles from "./LandingPage.module.css";
+import { resetCapturados } from "../store/capturedStorage.js";
 
 function validarNombreEntrenador(valor) {
     const name = valor.trim();
@@ -56,6 +57,13 @@ export default function LandingPage() {
         }
 
         const limpio = trainerName.trim();
+
+        //Si se cambia el nombre en el inicio se resetea el localStorage
+        const anterior = getTrainerName();
+        if (anterior && anterior !== limpio) {
+            resetCapturados();
+        }
+
         setTrainerName(limpio);
         navigate("/pokedexPage");
     };

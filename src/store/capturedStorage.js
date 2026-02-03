@@ -30,6 +30,21 @@ function guardarEnLocalStorage(ids) {
     }
 }
 
+//Resetea el LocalStorage con un nuevo usuario.
+export function resetCapturados() {
+    try {
+        localStorage.removeItem("pokemonsCapturadosId");
+        window.dispatchEvent(
+            new CustomEvent("cambioEn:pokemonsCapturadosId", {
+                detail: { capturedIds: [] }
+            })
+        );
+    } catch (err) {
+        console.error("Error reseteando capturados:", err);
+    }
+}
+
+
 //Para escuchar el evento desde fuera
 export function getCapturedEventName() {
     return EVENT_NAME;

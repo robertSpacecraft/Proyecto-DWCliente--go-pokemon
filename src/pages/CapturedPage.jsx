@@ -1,4 +1,3 @@
-// src/pages/CapturedPage.jsx
 import { Link } from "react-router-dom";
 import { useCapturados } from "../hooks/useCapturados.js";
 import styles from "./CapturedPage.module.css";
@@ -10,7 +9,7 @@ function getPokemonImageById(id) {
 export default function CapturedPage() {
     const { idsCapturados, cantidadCapturados, liberar } = useCapturados();
 
-    // Estado vacío
+    //En estado "vacío"
     if (!idsCapturados || idsCapturados.length === 0) {
         return (
             <div className={styles.emptyState}>
@@ -25,7 +24,6 @@ export default function CapturedPage() {
 
     return (
         <div className={styles.container}>
-            {/* Cabecera */}
             <header className={styles.header}>
                 <div>
                     <h1 className={styles.title}>Mis capturados</h1>
@@ -39,7 +37,6 @@ export default function CapturedPage() {
                 </Link>
             </header>
 
-            {/* Grid de capturados */}
             <div className={styles.grid}>
                 {idsCapturados.map((id) => (
                     <div key={id} className={styles.card}>
@@ -52,7 +49,7 @@ export default function CapturedPage() {
                             />
                             <div className={styles.cardBody}>
                                 <h3 className={styles.cardName}>Pokémon #{id}</h3>
-                                <p className={styles.cardHint}>Ver detalle →</p>
+                                <p className={styles.cardHint}>Ver detalle --</p>
                             </div>
                         </Link>
 

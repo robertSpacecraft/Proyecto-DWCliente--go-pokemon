@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./CapturaInteractiva.module.css";
 
+//Limito el máximo y el mínimo de la zona de captura.
 function clamp(min, value, max) {
     return Math.max(min, Math.min(value, max));
 }
@@ -13,26 +14,27 @@ export default function CapturaInteractiva({
     onFailFinal,
     onCancel,
 }) {
-    // NUEVO: posición del “contador” 0..100
+    //Posición del contador
     const [pos, setPos] = useState(0);
-    const [dir, setDir] = useState(1); // 1 = sube, -1 = baja
+    const [dir, setDir] = useState(1);
     const [intentos, setIntentos] = useState(intentosMax);
     const [mensaje, setMensaje] = useState("");
 
     const rafRef = useRef(null);
     const runningRef = useRef(true);
 
-    // NUEVO: calcula la zona objetivo según speed (más speed = zona más pequeña)
+    //Calcula la zona de captura
     const { start, end, anchoZona } = useMemo(() => {
-        const ancho = clamp(8, 30 - speed / 5, 30); // 8%..30%
-        // colocamos la zona en un punto “aleatorio” estable por render (una sola vez por montaje)
+        const ancho = clamp(8, 30 - speed / 5, 30);
+
+        //La zona se coloca en la barra de forma aleatoria
         const minStart = 5;
         const maxStart = 100 - ancho - 5;
         const randomStart = Math.floor(minStart + Math.random() * (maxStart - minStart));
         return { start: randomStart, end: randomStart + ancho, anchoZona: ancho };
     }, [speed]);
 
-    // NUEVO: animación suave con requestAnimationFrame
+    //La animación con requestAnimationFrame()
     useEffect(() => {
         runningRef.current = true;
 
@@ -40,11 +42,11 @@ export default function CapturaInteractiva({
             if (!runningRef.current) return;
 
             setPos((prev) => {
-                let next = prev + dir * 1.2; // velocidad del cursor (ajustable)
+                let next = prev + dir * 1.5;
                 if (next >= 100) next = 100;
                 if (next <= 0) next = 0;
 
-                // si llega a extremos, invertimos dirección
+                //Cuando llega a un extremo, se inverte la dirección
                 if (next === 100) setDir(-1);
                 if (next === 0) setDir(1);
 
@@ -63,7 +65,8 @@ export default function CapturaInteractiva({
     }, [dir]);
 
     const lanzar = () => {
-        // comprobación de acierto
+
+        //Comprobación del acierto
         const acierto = pos >= start && pos <= end;
 
         if (acierto) {
@@ -74,7 +77,7 @@ export default function CapturaInteractiva({
             return;
         }
 
-        // fallo
+        //Fallos e intentos
         setIntentos((prev) => prev - 1);
         const restantes = intentos - 1;
 
@@ -98,6 +101,7 @@ export default function CapturaInteractiva({
             </p>
 
             <div className={styles.bar}>
+                
                 {/* Zona objetivo */}
                 <div
                     className={styles.target}

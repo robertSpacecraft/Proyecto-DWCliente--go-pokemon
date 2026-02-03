@@ -14,17 +14,17 @@ export default function PokedexPage() {
     //Término de búsqueda
     const [terminoBusqueda, setTerminoBusqueda] = useState("");
 
-    // NUEVO: ordenación del listado (se aplica sobre la lista ya filtrada)
+    //Con la lista ya filtrado se hace la ordenación del listado de forma ascendente.
     const [ordenSeleccionado, setOrdenSeleccionado] = useState("id-asc");
 
-    // estados para el filtro por tipo (usando el endpoint /type y /type/{name})
+    //Para el filtro por tipo
     const [tiposDisponibles, setTiposDisponibles] = useState([]);
     const [tipoSeleccionado, setTipoSeleccionado] = useState("");
-    const [nombresPermitidosPorTipo, setNombresPermitidosPorTipo] = useState(null); // null = sin filtro aplicado
+    const [nombresPermitidosPorTipo, setNombresPermitidosPorTipo] = useState(null);
     const [cargandoTipos, setCargandoTipos] = useState(false);
     const [errorTipos, setErrorTipos] = useState(null);
 
-    // cargar la lista de tipos (una vez)
+    //Carga la lista de tipos una sola vez
     useEffect(() => {
         let activo = true;
 
@@ -36,7 +36,7 @@ export default function PokedexPage() {
                 const data = await connect("type");
                 const lista = (data.results ?? [])
                     .map((t) => t.name)
-                    .filter((name) => name !== "unknown" && name !== "shadow"); // opcional: excluye tipos especiales
+                    .filter((name) => name !== "unknown" && name !== "shadow");
 
                 if (!activo) return;
                 setTiposDisponibles(lista);
@@ -56,12 +56,13 @@ export default function PokedexPage() {
         };
     }, []);
 
-    // cuando se selecciona un tipo, obtener la lista de pokémon de ese tipo y filtrar por nombre
+    //Se obtiene la lista del tipo y se ordena por nombre
     useEffect(() => {
         let activo = true;
 
         const cargarNombresPorTipo = async () => {
-            // Si no hay tipo seleccionado, quitamos el filtro
+
+            //Sin tipo seleccionado quito el filtro
             if (!tipoSeleccionado) {
                 setNombresPermitidosPorTipo(null);
                 return;
@@ -80,7 +81,7 @@ export default function PokedexPage() {
                 setNombresPermitidosPorTipo(setNombres);
             } catch (err) {
                 if (!activo) return;
-                setErrorTipos(err?.message ?? "Error al cargar pokémon por tipo");
+                setErrorTipos(err?.message ?? "Error al cargar pokémons por tipo");
                 setNombresPermitidosPorTipo(null);
             } finally {
                 if (!activo) return;
@@ -95,12 +96,12 @@ export default function PokedexPage() {
         };
     }, [tipoSeleccionado]);
 
-    // Lista filtrada según búsqueda + tipo
+    //Lista filtrada según búsqueda y tipo
     const pokemonsFiltrados = pokemons
         .filter((p) => p.name.toLowerCase().includes(terminoBusqueda.toLowerCase()))
         .filter((p) => (nombresPermitidosPorTipo ? nombresPermitidosPorTipo.has(p.name) : true));
 
-    // NUEVO: ordenación (sin mutar el array original)
+    //Ordeanación
     const pokemonsOrdenados = [...pokemonsFiltrados].sort((a, b) => {
         switch (ordenSeleccionado) {
             case "id-asc":
@@ -147,8 +148,6 @@ export default function PokedexPage() {
     return (
         <div className={styles.container}>
             <Header />
-
-            {/* Buscador por nombre */}
             <div className={styles.searchContainer}>
                 <input
                     type="text"
@@ -159,7 +158,6 @@ export default function PokedexPage() {
                 />
             </div>
 
-            {/* NUEVO: Fila de filtros + ordenación */}
             <div className={styles.filterRow}>
                 <label className={styles.filterLabel}>
                     Tipo:
@@ -178,7 +176,6 @@ export default function PokedexPage() {
                     </select>
                 </label>
 
-                {/* NUEVO: Select de ordenación */}
                 <label className={styles.filterLabel}>
                     Orden:
                     <select
@@ -202,14 +199,12 @@ export default function PokedexPage() {
                 )}
             </div>
 
-            {/* Estado sin resultados (cuando hay búsqueda o tipo) */}
             {(terminoBusqueda || tipoSeleccionado) && pokemonsOrdenados.length === 0 && (
                 <p className={styles.noResults}>
                     No se han encontrado Pokémon con los filtros actuales.
                 </p>
             )}
 
-            {/* Grid de Cards */}
             <div className={styles.grid}>
                 {pokemonsOrdenados.map((pokemon) => (
                     <Link
@@ -229,7 +224,6 @@ export default function PokedexPage() {
                             <h3 className={styles.cardName}>{pokemon.name}</h3>
                             <span className={styles.cardId}>#{pokemon.id}</span>
 
-                            {/* Tipos (por ahora puede venir vacío) */}
                             {pokemon.types && pokemon.types.length > 0 && (
                                 <div className={styles.typesContainer}>
                                     {pokemon.types.map((t) => (
@@ -244,7 +238,6 @@ export default function PokedexPage() {
                 ))}
             </div>
 
-            {/* Botón Cargar más */}
             {hasMore && (
                 <div className={styles.loadMoreContainer}>
                     <button

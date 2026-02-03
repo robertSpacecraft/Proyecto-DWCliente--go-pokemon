@@ -1,8 +1,8 @@
-import { useState } from "react"; // NUEVO: estado para mostrar/ocultar la captura interactiva
+import { useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { usePokemonDetail } from "../hooks/usePokemonDetail.js";
 import { useCapturados } from "../hooks/useCapturados.js";
-import CapturaInteractiva from "../components/CapturaInteractiva.jsx"; // NUEVO: componente del minijuego
+import CapturaInteractiva from "../components/CapturaInteractiva.jsx";
 import styles from "./PokemonDetailPage.module.css";
 
 export default function PokemonDetailPage() {
@@ -14,9 +14,8 @@ export default function PokemonDetailPage() {
 
     const capturado = estaCapturado(id);
 
-    const [mostrandoCaptura, setMostrandoCaptura] = useState(false); // NUEVO: controla el panel de captura
+    const [mostrandoCaptura, setMostrandoCaptura] = useState(false);
 
-    //Loading
     if (loading) {
         return (
             <div className={styles.loadingState}>
@@ -25,7 +24,6 @@ export default function PokemonDetailPage() {
         );
     }
 
-    //Error
     if (error) {
         return (
             <div className={styles.errorState}>
@@ -37,7 +35,7 @@ export default function PokemonDetailPage() {
         );
     }
 
-    //Sin datos
+    //Cuando está sin datos
     if (!pokemon) {
         return (
             <div className={styles.emptyState}>
@@ -51,7 +49,6 @@ export default function PokemonDetailPage() {
 
     return (
         <div className={styles.container}>
-            {/* Cabecera */}
             <header className={styles.header}>
                 <Link to="/pokedexPage" className={styles.backLink}>
                     ← Ir a la pokédex
@@ -77,7 +74,6 @@ export default function PokemonDetailPage() {
                 </button>
             </header>
 
-            {/* Imagen + Tipos (siempre visible) */}
             <section className={styles.topSection}>
                 <img
                     src={pokemon.image ?? ""}
@@ -96,7 +92,6 @@ export default function PokemonDetailPage() {
                 )}
             </section>
 
-            {/* Bloqueo por captura (pulido) */}
             {!capturado ? (
                 <section className={styles.lockedSection}>
                     <div className={styles.lockedCard}>
@@ -112,7 +107,6 @@ export default function PokemonDetailPage() {
                             <li>Altura y peso</li>
                         </ul>
 
-                        {/* NUEVO: el botón ya no captura directamente, abre el minijuego */}
                         {!mostrandoCaptura ? (
                             <button
                                 type="button"
@@ -144,7 +138,6 @@ export default function PokemonDetailPage() {
                 </section>
             ) : (
                 <section className={styles.detailSection}>
-                    {/* Datos generales */}
                     <div className={styles.card}>
                         <h2 className={styles.cardTitle}>Datos</h2>
                         <ul className={styles.list}>
@@ -159,7 +152,6 @@ export default function PokemonDetailPage() {
                         </ul>
                     </div>
 
-                    {/* Habilidades */}
                     <div className={styles.card}>
                         <h2 className={styles.cardTitle}>Habilidades</h2>
                         {pokemon.abilities && pokemon.abilities.length > 0 ? (
@@ -173,7 +165,6 @@ export default function PokemonDetailPage() {
                         )}
                     </div>
 
-                    {/* Stats */}
                     <div className={styles.card}>
                         <h2 className={styles.cardTitle}>Stats</h2>
                         <ul className={styles.list}>
