@@ -15,7 +15,7 @@ export default function Header() {
 
                 <Link to="/" className={styles.logoLink} aria-label="Ir al inicio">
                     <img 
-                        src="public/pokédex_logo.png" 
+                        src="public/pokedex_logo.png" 
                         alt="Pokédex Logo" 
                         className={styles.logoImage} 
                     />
