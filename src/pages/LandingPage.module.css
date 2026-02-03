@@ -1,0 +1,208 @@
+/* --- Contenedor Principal --- */
+.container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, #2c3e50 0%, #000000 100%);
+    padding: 1rem;
+    color: white;
+    text-align: center;
+    font-family: system-ui, -apple-system, sans-serif;
+    overflow: hidden;
+    /* Intenta evitar scroll */
+}
+
+/* --- Logo --- */
+.logo {
+    width: 100%;
+    max-width: 280px;
+    /* Un poco más pequeño para dejar sitio al form */
+    height: auto;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 0 15px rgba(255, 203, 5, 0.4));
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* --- Subtítulo --- */
+.subtitle {
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin-bottom: 2rem;
+    color: #d1d5db;
+    line-height: 1.4;
+    font-weight: 300;
+}
+
+/* --- FORMULARIO --- */
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    /* Ancho controlado para que se vea bien */
+    gap: 1rem;
+    margin-bottom: 2rem;
+    z-index: 10;
+    /* Asegura que esté por encima de todo */
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #ffcb05;
+    /* Etiqueta amarilla para destacar */
+}
+
+.input {
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    color: #333;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.input:focus {
+    background-color: #fff;
+    border-color: #3b4cca;
+    /* Azul Pokémon al escribir */
+    box-shadow: 0 0 10px rgba(59, 76, 202, 0.3);
+}
+
+.formError {
+    color: #ff6b6b;
+    /* Rojo claro para que se lea sobre oscuro */
+    font-size: 0.85rem;
+    text-align: left;
+    margin-top: -0.5rem;
+    /* Pegadito al input */
+    animation: shake 0.3s ease-in-out;
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+/* --- Botón Principal --- */
+.primaryBtn {
+    background-color: #ffcb05;
+    color: #21386e;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 800;
+    padding: 12px;
+    border-radius: 50px;
+    box-shadow: 0 0 15px rgba(255, 203, 5, 0.4);
+    transition: all 0.2s ease;
+    border: 3px solid #3b4cca;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+}
+
+.primaryBtn:hover:not(:disabled) {
+    background-color: #ffe066;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(255, 203, 5, 0.6);
+}
+
+.primaryBtn:disabled {
+    background-color: #555;
+    border-color: #777;
+    color: #aaa;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* --- Enlace Secundario (Entrar directamente) --- */
+.secondaryLink {
+    color: #aaa;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    margin-top: 0.5rem;
+    transition: color 0.2s;
+}
+
+.secondaryLink:hover {
+    color: #fff;
+}
+
+/* --- Vídeo --- */
+.video {
+    width: 100%;
+    max-width: 400px;
+    /* Reducido para que no compita con el formulario */
+    max-height: 25vh;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    object-fit: cover;
+    opacity: 0.8;
+    /* Un poco más sutil ahora que no es el protagonista */
+    transition: opacity 0.3s;
+}
+
+.video:hover {
+    opacity: 1;
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+    .container {
+        height: auto;
+        min-height: 100vh;
+        padding: 2rem 1rem;
+        overflow-y: auto;
+        /* Permitir scroll en móviles si el teclado tapa */
+    }
+
+    .logo {
+        max-width: 220px;
+    }
+
+    .form {
+        max-width: 100%;
+    }
+
+    .video {
+        margin-top: 2rem;
+        max-width: 100%;
+    }
+}

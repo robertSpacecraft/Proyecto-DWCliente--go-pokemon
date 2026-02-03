@@ -1,0 +1,178 @@
+/* --- Contenedor Principal --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* --- Estados Vacíos --- */
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    text-align: center;
+    gap: 1.5rem;
+}
+
+.text {
+    font-size: 1.2rem;
+    color: #666;
+    margin: 0;
+}
+
+/* --- Header --- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.title {
+    margin: 0;
+    font-size: 2rem;
+    color: #333;
+}
+
+.subtitle {
+    margin: 0.5rem 0 0 0;
+    font-size: 1rem;
+    color: #666;
+}
+
+.backLink {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    transition: all 0.2s;
+}
+
+.backLink:hover {
+    background-color: #e2e6ea;
+    color: #0056b3;
+}
+
+/* --- Grid de Capturados --- */
+.grid {
+    display: grid;
+    /* Crea columnas automáticas de mínimo 200px */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+/* --- Tarjeta Individual --- */
+.card {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08);
+    border-color: #ddd;
+}
+
+/* --- Link dentro de la tarjeta (Área clicable superior) --- */
+.cardLink {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    flex-grow: 1;
+    /* Empuja el botón hacia abajo si sobra espacio */
+}
+
+.cardImage {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
+    transition: transform 0.2s;
+}
+
+/* Efecto zoom sutil en la imagen al pasar el ratón por la tarjeta */
+.card:hover .cardImage {
+    transform: scale(1.1);
+}
+
+.cardBody {
+    text-align: center;
+}
+
+.cardName {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+    text-transform: capitalize;
+    color: #333;
+}
+
+.cardHint {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #999;
+    font-weight: 500;
+}
+
+/* --- Botón Liberar (Acción Destructiva) --- */
+.releaseBtn {
+    width: 100%;
+    border: none;
+    background-color: #fff0f0;
+    /* Rojo muy pálido */
+    color: #d32f2f;
+    /* Rojo oscuro */
+    padding: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-top: 1px solid #ffe0e0;
+}
+
+.releaseBtn:hover {
+    background-color: #ffe0e0;
+    color: #b71c1c;
+}
+
+/* --- Responsive --- */
+@media (max-width: 500px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .backLink {
+        align-self: flex-start;
+        padding-left: 0;
+        background: transparent;
+    }
+
+    .grid {
+        grid-template-columns: 1fr 1fr;
+        /* 2 columnas en móvil */
+        gap: 1rem;
+    }
+
+    .cardImage {
+        width: 100px;
+        height: 100px;
+    }
+}

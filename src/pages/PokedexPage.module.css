@@ -1,0 +1,266 @@
+/* --- Contenedor Principal --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem 2rem 1rem;
+    /* Ajustado el padding superior */
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* --- Estados de Carga / Error / Vacío --- */
+.loadingState,
+.errorState,
+.emptyState {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    font-size: 1.5rem;
+    color: #666;
+    text-align: center;
+}
+
+.errorState {
+    color: #e74c3c;
+}
+
+/* --- CONTROLES (Buscador y Filtros) --- */
+
+/* 1. Buscador */
+.searchContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    /* Margen superior para separarlo del Header */
+    margin-bottom: 1rem;
+}
+
+.searchInput {
+    width: 100%;
+    max-width: 500px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 50px;
+    outline: none;
+    transition: all 0.3s ease;
+    color: #333;
+    background-color: #fafafa;
+}
+
+.searchInput:focus {
+    border-color: #3b4cca;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(59, 76, 202, 0.15);
+}
+
+.searchInput::placeholder {
+    color: #aaa;
+}
+
+/* 2. Fila de Filtros (Tipo y Orden) */
+.filterRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.filterLabel {
+    font-weight: 600;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+}
+
+.typeSelect {
+    padding: 8px 30px 8px 12px;
+    font-size: 0.95rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: white;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+    text-transform: capitalize;
+    transition: border-color 0.2s;
+    min-width: 140px;
+
+    /* Icono de flecha custom */
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+}
+
+.typeSelect:focus {
+    border-color: #3b4cca;
+}
+
+.typeSelect:disabled {
+    background-color: #f5f5f5;
+    color: #999;
+    cursor: wait;
+}
+
+.filterHint {
+    font-size: 0.9rem;
+    color: #888;
+    font-style: italic;
+    margin-left: 0.5rem;
+}
+
+.filterError {
+    font-size: 0.9rem;
+    color: #d32f2f;
+    margin-left: 0.5rem;
+}
+
+/* --- Mensaje Sin Resultados --- */
+.noResults {
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+    font-size: 1.1rem;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    margin-top: 1rem;
+    border: 1px dashed #ddd;
+}
+
+/* --- Grid de Cards --- */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
+}
+
+/* --- Tarjeta Individual --- */
+.card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 1rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-color: #3b4cca;
+}
+
+.cardImage {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    background: radial-gradient(circle, #f5f5f5 50%, transparent 70%);
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.cardBody {
+    width: 100%;
+    text-align: center;
+}
+
+.cardName {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: capitalize;
+    color: #333;
+}
+
+.cardId {
+    display: block;
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+}
+
+/* --- Tipos (Etiquetas) --- */
+.typesContainer {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.typeBadge {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+    background-color: #f0f0f0;
+    color: #555;
+    text-transform: capitalize;
+}
+
+/* --- Botón Cargar Más --- */
+.loadMoreContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+
+.loadMoreBtn {
+    background-color: #3b4cca;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(59, 76, 202, 0.3);
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.loadMoreBtn:hover:not(:disabled) {
+    background-color: #2a3990;
+    transform: scale(1.05);
+}
+
+.loadMoreBtn:disabled {
+    background-color: #a0a0a0;
+    cursor: wait;
+    box-shadow: none;
+    opacity: 0.7;
+}
+
+/* --- Responsive (Mobile) --- */
+@media (max-width: 600px) {
+    .searchContainer {
+        margin-top: 1rem;
+    }
+
+    .filterRow {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .filterLabel {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .typeSelect {
+        width: 100%;
+    }
+}

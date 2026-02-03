@@ -1,0 +1,102 @@
+/* --- Barra contenedora (Fondo y Sticky) --- */
+.container {
+    background-color: white;
+    border-bottom: 2px solid #f0f0f0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    /* Para que quede por encima del contenido al hacer scroll */
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+/* --- Contenido interno (Ancho limitado) --- */
+.header {
+    max-width: 1200px;
+    /* Mismo ancho que tus páginas */
+    margin: 0 auto;
+    padding: 1rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* --- Título --- */
+.logoLink {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.logoLink:hover {
+    opacity: 0.8;
+    /* Efecto hover sutil */
+}
+
+.logoImage {
+    height: 40px;
+    /* Ajusta este valor según el tamaño real de tu logo */
+    width: auto;
+    /* Mantiene la proporción */
+    object-fit: contain;
+}
+
+/* --- Navegación --- */
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-grow: 1;
+    /* Empuja la insignia a la derecha si es necesario */
+    justify-content: flex-end;
+    /* Alinea el enlace a la derecha junto a la insignia */
+}
+
+/* --- Botón "Ver mis capturados" --- */
+.linkCapturados {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 2px solid #ffcb05;
+    /* Amarillo Pokémon */
+    border-radius: 20px;
+    color: #333;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    background-color: #fff;
+    white-space: nowrap;
+    /* Evita que el texto se rompa */
+}
+
+.linkCapturados:hover {
+    background-color: #ffcb05;
+    color: #21386e;
+    /* Azul Pokémon */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 203, 5, 0.3);
+}
+
+/* --- Responsive (Móvil) --- */
+@media (max-width: 650px) {
+    .header {
+        flex-direction: column;
+        gap: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .nav {
+        width: 100%;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .linkCapturados {
+        width: 100%;
+        text-align: center;
+    }
+}

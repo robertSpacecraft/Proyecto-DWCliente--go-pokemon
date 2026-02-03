@@ -1,0 +1,118 @@
+/* --- Contenedor Centrado (Pantalla Completa) --- */
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    background-color: #fafafa;
+    /* Fondo gris muy claro */
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* --- Título Gigante --- */
+.title {
+    font-size: 8rem;
+    font-weight: 900;
+    margin: 0;
+    line-height: 1;
+    /* Color gris pálido con sombra azul Pokémon */
+    color: #e0e0e0;
+    text-shadow: 4px 4px 0 #3b4cca;
+    user-select: none;
+}
+
+/* --- Texto explicativo --- */
+.text {
+    font-size: 1.5rem;
+    color: #555;
+    margin: 1rem 0;
+    font-weight: 500;
+}
+
+/* --- Ruta del error (Estilo código) --- */
+.path {
+    background-color: #fff5f5;
+    /* Fondo rojizo suave */
+    color: #d32f2f;
+    /* Rojo error */
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px dashed #ef9a9a;
+    margin-bottom: 3rem;
+    font-family: monospace;
+    font-size: 1rem;
+    max-width: 100%;
+    word-break: break-all;
+}
+
+/* --- Botones de Acción --- */
+.actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.primaryBtn,
+.secondaryBtn {
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+/* Botón "Ir al inicio" (Azul fuerte) */
+.primaryBtn {
+    background-color: #3b4cca;
+    color: white;
+    box-shadow: 0 4px 10px rgba(59, 76, 202, 0.3);
+    border: 2px solid transparent;
+}
+
+.primaryBtn:hover {
+    background-color: #2a3990;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(59, 76, 202, 0.4);
+}
+
+/* Botón "Ir a la Pokédex" (Borde sutil) */
+.secondaryBtn {
+    background-color: transparent;
+    color: #666;
+    border: 2px solid #ddd;
+}
+
+.secondaryBtn:hover {
+    border-color: #3b4cca;
+    color: #3b4cca;
+    background-color: white;
+}
+
+/* --- Responsive --- */
+@media (max-width: 500px) {
+    .title {
+        font-size: 5rem;
+    }
+
+    .text {
+        font-size: 1.2rem;
+    }
+
+    .actions {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .primaryBtn,
+    .secondaryBtn {
+        width: 100%;
+        text-align: center;
+    }
+}
