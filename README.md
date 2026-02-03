@@ -46,4 +46,4 @@ La aplicación sigue una estructura organizada para facilitar la escalabilidad:
 
 1. **Clona este repositorio:**
    ```bash
-   git clone [https://github.com/robertSpacecraft/Proyecto-DWCliente--go-pokemon.git](https://github.com/robertSpacecraft/Proyecto-DWCliente--go-pokemon.git)
+   git clone https://github.com/robertSpacecraft/Proyecto-DWCliente--go-pokemon.git
